@@ -1,20 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Main from './src/main/main';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import Validator from './src/Validator/Validator';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Main />
-    </View>
-  );
+  return <Validator />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Tab = createBottomTabNavigator();
