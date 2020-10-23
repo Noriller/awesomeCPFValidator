@@ -13,5 +13,5 @@ describe('Validator', () => {
     expect(wrapper.find('div').length).toEqual(1);
   });
 
-  it.todo('coisas');
+  it.todo('coisas a serem feitas');
 });
