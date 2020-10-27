@@ -1,7 +1,5 @@
 ﻿import React from 'react';
-import InputBox, {
-  useInputBox,
-} from './InputBox/InputBox';
+import InputBox from './InputBox/InputBox';
 import ValidateButton from './ValidateButton/ValidateButton';
 
 const Validator = () => {

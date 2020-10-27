@@ -11,18 +11,18 @@ import {
 } from 'rxjs/operators';
 
 const InputBox = () => {
-  const [value, setValue] = useState('');
+  const [CPFValue, setCPF] = useState('');
 
   const handleChange = el => {
-    let newValue = cpfMask(el.target.value);
-    setValue(newValue);
-    emitInput(newValue);
+    const newCPFValue = cpfMask(el.target.value);
+    setCPF(newCPFValue);
+    emitNewCPF(newCPFValue);
   };
 
   return (
     <input
       inputMode='numeric'
-      value={value}
+      value={CPFValue}
       placeholder={'000.000.000-00'}
       onChange={handleChange}
       className='inputBox'
@@ -30,8 +30,8 @@ const InputBox = () => {
   );
 };
 
-function emitInput(input: string) {
-  inputBox$.next(new CPF(input));
+function emitNewCPF(cpf: string) {
+  inputBox$.next(new CPF(cpf));
 }
 
 export default InputBox;
