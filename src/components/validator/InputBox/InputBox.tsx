@@ -1,42 +1,58 @@
-﻿import React, { useState } from 'react';
+﻿import React, {
+  useEffect,
+  useState,
+} from 'react';
+import { Subject } from 'rxjs';
+import { cpfMask } from '../../../utils/CPF/cpfMask';
+import { CPF } from '../../../utils/CPF/CPF';
+import {
+  debounceTime,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 
 const InputBox = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState('');
 
   const handleChange = el => {
-    const newValue = el.target.value;
-    console.log(newValue);
-    const lastNumber = parseInt(
-      newValue.toString().slice(-1),
-    );
-    console.log(lastNumber);
-    setValue(lastNumber);
-  };
-
-  const sanitizeInput = ev => {
-    if (!isNaN(ev.target.value))
-      document.querySelector(
-        '#numberInput',
-      ).value = '';
+    let newValue = cpfMask(el.target.value);
+    setValue(newValue);
+    emitInput(newValue);
   };
 
   return (
     <input
-      type='number'
-      pattern='[0-9]'
-      min='0'
-      max='9'
-      id='numberInput'
-      maxLength={1}
-      minLength={1}
+      inputMode='numeric'
       value={value}
-      // defaultValue={0}
-      onKeyDown={sanitizeInput}
-      onInput={handleChange}
-      // onChange={handleChange}
+      placeholder={'000.000.000-00'}
+      onChange={handleChange}
       className='inputBox'
     />
   );
 };
 
+function emitInput(input: string) {
+  inputBox$.next(new CPF(input));
+}
+
 export default InputBox;
+
+const inputBox$ = new Subject<CPF>();
+
+export function useInputBox() {
+  const [cpfObject, setCPF] = useState(
+    new CPF(''),
+  );
+
+  useEffect(() => {
+    const subscription = inputBox$
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+      )
+      .subscribe(cpf => setCPF(cpf));
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return cpfObject;
+}

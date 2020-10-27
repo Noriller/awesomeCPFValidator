@@ -9,8 +9,16 @@ xdescribe('Validator', () => {
     wrapper = shallow(<Validator />);
   });
 
-  it('should render a <div />', () => {
-    expect(wrapper.find('div').length).toEqual(1);
+  xit('should render a <InputBox />', () => {
+    expect(
+      wrapper.find('InputBox').length,
+    ).toEqual(1);
+  });
+
+  xit('should render a <ValidateButton />', () => {
+    expect(
+      wrapper.find('ValidateButton').length,
+    ).toEqual(1);
   });
 
   it.todo('coisas a serem feitas');
