@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { CPF } from '../../../utils/CPF/CPF';
+import { inputBox$ } from '../InputBox/InputBox';
 import { validateButton$ } from '../ValidateButton/ValidateButton';
 
 export function useValidateClick() {
@@ -14,7 +16,8 @@ export function useValidateClick() {
     if (shenanigan)
       setTimeout(() => {
         validateButton$.next(false);
-      }, 1000);
+        inputBox$.next(new CPF(''));
+      }, 2000);
 
     return () => sub.unsubscribe();
   }, [shenanigan]);

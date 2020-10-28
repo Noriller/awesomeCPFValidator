@@ -1,4 +1,4 @@
-import useInputBox from '../InputBox/useInputBox';
+import useChangeInputBox from '../InputBox/useInputBox';
 import React, {
   useEffect,
   useState,
@@ -10,7 +10,7 @@ const ValidateButton = () => {
   const [buttonState, setDisabled] = useState(
     true,
   );
-  const { fullCPFNumber } = useInputBox();
+  const { fullCPFNumber } = useChangeInputBox();
   const shouldBeDisabled = !fullCPFNumber;
   const validateClick = useValidateClick();
 

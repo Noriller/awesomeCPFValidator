@@ -9,7 +9,7 @@ export class CPF {
     this.fullCPFNumber = cpf.length === this.cpfLenghWithMask ? true : false;
   }
 
-  getUnmaskedCPF (): number {
+  getUnmaskedCPF (): string {
     return cpfUnmask( this.cpf );
   }
 }

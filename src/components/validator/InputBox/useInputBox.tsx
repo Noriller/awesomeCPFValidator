@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CPF } from '../../../utils/CPF/CPF';
 import { inputBox$ } from './InputBox';
 
-function useInputBox() {
+function useChangeInputBox() {
   const [cpfObject, setCPF] = useState(
     new CPF(''),
   );
@@ -18,4 +18,4 @@ function useInputBox() {
   return cpfObject;
 }
 
-export default useInputBox;
+export default useChangeInputBox;
