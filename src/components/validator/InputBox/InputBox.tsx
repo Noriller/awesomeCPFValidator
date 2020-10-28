@@ -1,20 +1,15 @@
-﻿import React, {
-  useEffect,
-  useState,
-} from 'react';
+﻿import React, { useState } from 'react';
 import { Subject } from 'rxjs';
 import { cpfMask } from '../../../utils/CPF/cpfMask';
 import { CPF } from '../../../utils/CPF/CPF';
-import {
-  debounceTime,
-  distinctUntilChanged,
-} from 'rxjs/operators';
 
 const InputBox = () => {
   const [CPFValue, setCPF] = useState('');
 
-  const handleChange = el => {
-    const newCPFValue = cpfMask(el.target.value);
+  const handleChange = input => {
+    const newCPFValue = cpfMask(
+      input.target.value,
+    );
     setCPF(newCPFValue);
     emitNewCPF(newCPFValue);
   };
@@ -36,23 +31,4 @@ function emitNewCPF(cpf: string) {
 
 export default InputBox;
 
-const inputBox$ = new Subject<CPF>();
-
-export function useInputBox() {
-  const [cpfObject, setCPF] = useState(
-    new CPF(''),
-  );
-
-  useEffect(() => {
-    const subscription = inputBox$
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-      )
-      .subscribe(cpf => setCPF(cpf));
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  return cpfObject;
-}
+export const inputBox$ = new Subject<CPF>();

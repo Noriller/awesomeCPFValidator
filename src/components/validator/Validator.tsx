@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import InputBox from './InputBox/InputBox';
 import ValidateButton from './ValidateButton/ValidateButton';
+import ValidateShenanigans from './ValidateShenanigans/ValidateShenanigans';
 
 const Validator = () => {
   return (
@@ -14,6 +15,10 @@ const Validator = () => {
         <p></p>
       </div>
       <ValidateButton />
+      <div>
+        <p></p>
+      </div>
+      <ValidateShenanigans />
     </div>
   );
 };
