@@ -1,4 +1,4 @@
-import { CPFValidation } from './CPFValidation';
+import { CPFValidation, Digits, KnownInvalids, CPFValidateReturn } from './CPFValidation';
 
 class CPFValidator {
 
@@ -28,60 +28,101 @@ class CPFValidator {
     return this.finalValidation();
   }
 
-  public finalValidation () {
+  public finalValidation (): CPFValidateReturn {
+
+    const result: CPFValidateReturn = {
+      text: CPFValidation.default,
+      fullCpfNumber: this.cpf,
+      animationProps: {
+        knownInvalid: false,
+      }
+    };
+
     const isKnownInvalid = this.knownInvalids();
 
-    if ( isKnownInvalid )
-      return CPFValidation.knownInvalids;
+    if ( isKnownInvalid.stepValidation ) {
+      result.text = CPFValidation.knownInvalids;
+      result.animationProps.knownInvalid = isKnownInvalid.payload;
+      return result;
+    }
 
     const firstDigitValid = this.validateFirstDigit();
+    result.animationProps.firstDigit = firstDigitValid.payload;
 
-    if ( !firstDigitValid )
-      return CPFValidation.firstDigitInvalid;
+    if ( !firstDigitValid.stepValidation ) {
+      result.text = CPFValidation.firstDigitInvalid;
+      return result;
+    }
 
     const lastDigitValid = this.validateLastDigit();
+    result.animationProps.lastDigit = lastDigitValid.payload;
 
-    if ( !lastDigitValid )
-      return CPFValidation.lastDigitInvalid;
+    if ( !lastDigitValid.stepValidation ) {
+      result.text = CPFValidation.lastDigitInvalid;
+      return result;
+    }
 
-    return CPFValidation.valid;
+    result.text = CPFValidation.valid;
+    return result;
   }
 
-  public validateFirstDigit () {
-    const total = this.firstNumbers.map(
+  public validateFirstDigit (): Digits {
+    const multiplicationArray = this.firstNumbers.map(
       ( number, index ) => ( number * this.arrayToValidateFirstDigit[ index ] )
-    ).reduce(
+    );
+
+    const total = multiplicationArray.reduce(
       ( x, y ) => x + y, 0
     );
 
     let verificador = total * 10 % 11;
     verificador = ( verificador !== 10 ) ? verificador : 0;
 
-    return ( this.firstDigit === verificador ) ? true : false;
+    return {
+      stepValidation: ( this.firstDigit === verificador ) ? true : false,
+      payload: {
+        finalMultiplication: multiplicationArray,
+        digit: this.firstDigit
+      }
+    };
   }
 
-  public validateLastDigit () {
+  public validateLastDigit (): Digits {
     const array = this.firstNumbers;
     array.push( this.firstDigit );
-    const total = array.map(
+
+    const multiplicationArray = array.map(
       ( number, index ) => ( number * this.arrayToValidateLastDigit[ index ] )
-    ).reduce(
+    );
+
+    const total = multiplicationArray.reduce(
       ( x, y ) => x + y, 0
     );
 
     let verificador = total * 10 % 11;
     verificador = ( verificador !== 10 ) ? verificador : 0;
 
-    return ( this.lastDigit === verificador ) ? true : false;
+    return {
+      stepValidation: ( this.lastDigit === verificador ) ? true : false,
+      payload: {
+        finalMultiplication: multiplicationArray,
+        digit: this.lastDigit
+      }
+    };
   }
 
-  public knownInvalids () {
+  public knownInvalids (): KnownInvalids {
     const fullArray = [ ...this.firstNumbers ];
     fullArray.push( this.firstDigit, this.lastDigit );
 
     const allEqual = fullArray.every( n => n === fullArray[ 0 ] );
 
-    return allEqual;
+    return {
+      stepValidation: allEqual,
+      payload: {
+        number: fullArray[ 0 ]
+      }
+    };
   }
 
   private *numberGenerator ( first: number ) {

@@ -15,11 +15,11 @@ export function useValidateClick() {
       setShenanigan,
     );
 
-    if (shenanigan)
-      setTimeout(() => {
-        validateButton$.next(false);
-        inputBox$.next(new CPF(''));
-      }, 2000);
+    // if (shenanigan)
+    //   setTimeout(() => {
+    //     validateButton$.next(false);
+    //     inputBox$.next(new CPF(''));
+    //   }, 2000);
 
     return () => sub.unsubscribe();
   }, [shenanigan]);
