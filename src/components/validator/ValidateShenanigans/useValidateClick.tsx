@@ -8,6 +8,8 @@ export function useValidateClick() {
     false,
   );
 
+  // console.log('useValidateClick');
+
   useEffect(() => {
     const sub = validateButton$.subscribe(
       setShenanigan,

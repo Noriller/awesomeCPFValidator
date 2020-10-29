@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import { useState } from 'react';
 import { Subject } from 'rxjs';
 import { cpfMask } from '../../../utils/CPF/cpfMask';
 import { CPF } from '../../../utils/CPF/CPF';

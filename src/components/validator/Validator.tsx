@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import InputBox from './InputBox/InputBox';
+﻿import InputBox from './InputBox/InputBox';
 import ValidateButton from './ValidateButton/ValidateButton';
 import ValidateShenanigans from './ValidateShenanigans/ValidateShenanigans';
 

@@ -1,3 +1,4 @@
+import { CPFValidation } from './CPFValidation';
 
 class CPFValidator {
 
@@ -20,7 +21,6 @@ class CPFValidator {
 
     this.arrayToValidateFirstDigit = [ ...this.numberGenerator( 10 ) ];
     this.arrayToValidateLastDigit = [ ...this.numberGenerator( 11 ) ];
-
   }
 
   public Validate () {
@@ -29,16 +29,22 @@ class CPFValidator {
   }
 
   public finalValidation () {
-    const firstDigitValid = this.validateFirstDigit();
-    const lastDigitValid = this.validateLastDigit();
     const isKnownInvalid = this.knownInvalids();
 
-    let isValid = false;
+    if ( isKnownInvalid )
+      return CPFValidation.knownInvalids;
 
-    if ( firstDigitValid && lastDigitValid && !isKnownInvalid )
-      isValid = true;
+    const firstDigitValid = this.validateFirstDigit();
 
-    return `Bagaça é ${ isValid }`;
+    if ( !firstDigitValid )
+      return CPFValidation.firstDigitInvalid;
+
+    const lastDigitValid = this.validateLastDigit();
+
+    if ( !lastDigitValid )
+      return CPFValidation.lastDigitInvalid;
+
+    return CPFValidation.valid;
   }
 
   public validateFirstDigit () {
@@ -70,7 +76,7 @@ class CPFValidator {
   }
 
   public knownInvalids () {
-    const fullArray = this.firstNumbers;
+    const fullArray = [ ...this.firstNumbers ];
     fullArray.push( this.firstDigit, this.lastDigit );
 
     const allEqual = fullArray.every( n => n === fullArray[ 0 ] );

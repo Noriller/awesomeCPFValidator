@@ -7,6 +7,8 @@ function useChangeInputBox() {
     new CPF(''),
   );
 
+  // console.log('useChangeInputBox');
+
   useEffect(() => {
     const subscription = inputBox$.subscribe(
       setCPF,
