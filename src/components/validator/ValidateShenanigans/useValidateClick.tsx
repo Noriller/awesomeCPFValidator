@@ -19,7 +19,7 @@ export function useValidateClick() {
     //   setTimeout(() => {
     //     validateButton$.next(false);
     //     inputBox$.next(new CPF(''));
-    //   }, 2000);
+    //   }, 500);
 
     return () => sub.unsubscribe();
   }, [shenanigan]);

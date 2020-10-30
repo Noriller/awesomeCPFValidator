@@ -4,8 +4,19 @@ import ValidateShenanigans from './ValidateShenanigans/ValidateShenanigans';
 
 const Validator = () => {
   return (
-    <div className='app-container'>
-      <div>Za Warudo</div>
+    <div
+      className='app-container'
+      style={{
+        flex: 1,
+      }}>
+      <div
+        style={{
+          fontSize: '2rem',
+          fontWeight: 'bold',
+          textAlign: 'center',
+        }}>
+        Za Warudo
+      </div>
       <div>
         <p></p>
       </div>

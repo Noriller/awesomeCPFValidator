@@ -9,30 +9,22 @@ export enum CPFValidation {
   default = `Da frak you're doing?`,
 }
 
+
 export interface CPFValidateReturn {
   text: CPFValidation;
-  fullCpfNumber: string;
+  fullCpfArray: number[];
   animationProps: {
-    knownInvalid: KnownInvalids[ "payload" ] | boolean,
-    firstDigit?: Digits[ 'payload' ],
-    lastDigit?: Digits[ 'payload' ];
+    knownInvalid: boolean,
+    firstDigit?: Digits,
+    lastDigit?: Digits,
+    valid?: boolean,
   };
 }
-
-interface ValidationSteps {
-  stepValidation: boolean;
-  payload: {};
-}
-export interface KnownInvalids extends ValidationSteps {
-  payload: {
-    number: number;
-  };
+interface Digits {
+  array: number[];
+  sum: number;
+  verification: number;
 }
 
-
-export interface Digits extends ValidationSteps {
-  payload: {
-    finalMultiplication: number[],
-    digit: number;
-  };
+export interface ValidationSteps extends Boolean {
 }

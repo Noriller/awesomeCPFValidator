@@ -26,7 +26,7 @@ const InputBox = () => {
   return (
     <input
       inputMode='numeric'
-      disabled={validateButtonClicked}
+      hidden={validateButtonClicked}
       value={CPFValue}
       placeholder={'000.000.000-00'}
       onChange={handleChange}

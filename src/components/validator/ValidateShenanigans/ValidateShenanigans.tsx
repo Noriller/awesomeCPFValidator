@@ -3,12 +3,17 @@ import { of } from 'rxjs';
 import CPFValidator from '../../../utils/CPF/CPFValidator';
 import useChangeInputBox from '../InputBox/useInputBox';
 import { useValidateClick } from './useValidateClick';
-import ValidationAnimation from './ValidationAnimation/ValidationAnimation';
+import ValidationAnimation from '../ValidationAnimation/ValidationAnimation';
 
 const ValidateShenanigans = () => {
   const click = useValidateClick();
   const initialText = (
-    <text>
+    <text
+      style={{
+        fontSize: '0.8rem',
+        // fontWeight: 'lighter',
+        fontStyle: 'italic',
+      }}>
       {`Why don't you try using: 
       All the same numbers: 111.111.111-11
       One that you know is false: 123.456.789-00
@@ -22,18 +27,15 @@ const ValidateShenanigans = () => {
   let cpf = useChangeInputBox();
 
   if (click) {
-    const resultValidation = of(
-      new CPFValidator(
-        cpf.getUnmaskedCPF(),
-      ).Validate(),
+    const resultValidation = new CPFValidator(
+      cpf.getUnmaskedCPF(),
+    ).Validate();
+
+    text = (
+      <ValidationAnimation
+        {...resultValidation}
+      />
     );
-    resultValidation
-      .subscribe(validation => {
-        text = (
-          <ValidationAnimation {...validation} />
-        );
-      })
-      .unsubscribe();
   }
 
   return (
