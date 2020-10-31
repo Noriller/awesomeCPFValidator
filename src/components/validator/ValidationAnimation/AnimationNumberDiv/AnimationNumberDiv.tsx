@@ -1,24 +1,30 @@
-import { useState } from 'react';
+import { tap } from 'rxjs/operators';
 import { MyElement } from '../ValidationAnimation';
+import { useAnimationDigitUp } from './useAnimationDigitUp';
 import { useBlink } from './useBlink';
 
 const AnimationNumberDiv = (
   element: MyElement,
 ) => {
-  const [value] = useState(element.number);
-
   const blink = useBlink(element.index);
+
+  const { value, done } = useAnimationDigitUp(
+    element,
+  );
 
   return (
     <div
-      className={blink ? 'blink_me' : ''}
+      className={blink ? 'blink_me ' : ''}
       style={{
-        display: 'inline-block',
+        display:
+          value > 0 || !done
+            ? 'inline-block'
+            : 'none',
         padding: '10px',
         fontSize: '1.1rem',
         fontWeight: 'bold',
       }}>
-      {value}
+      {element ? value : ' '}
     </div>
   );
 };

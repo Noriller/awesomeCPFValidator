@@ -15,10 +15,10 @@ const ValidateShenanigans = () => {
         fontStyle: 'italic',
       }}>
       {`Why don't you try using: 
-      All the same numbers: 111.111.111-11
-      One that you know is false: 123.456.789-00
-      Or one that you know is true: 012.345.678-90
-      Go on... git it a try.`}
+      All numbers the same: 111.111.111-11
+      One that you know is invalid: 123.456.789-00
+      Or one that you know is valid: 012.345.678-90
+      Go on... give it a try.`}
     </text>
   );
 

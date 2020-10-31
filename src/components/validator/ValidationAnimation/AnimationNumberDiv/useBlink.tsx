@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { interval } from 'rxjs';
-import { delay, take } from 'rxjs/operators';
-import { knownInvalids$ } from '../ValidationOrchestration';
+import { delay } from 'rxjs/operators';
+import { knownInvalids$ } from '../ValidationOrchestration/KnownInvalidsOrchestration';
 
 export const useBlink = (index: number) => {
   const [blink, setBlink] = useState(false);

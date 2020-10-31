@@ -4,7 +4,7 @@ import React, {
   useState,
 } from 'react';
 import AnimationNumberDiv from './AnimationNumberDiv/AnimationNumberDiv';
-import { knownInvalidStep } from './ValidationOrchestration';
+import { knownInvalidStep } from './ValidationOrchestration/KnownInvalidsOrchestration';
 
 function ValidationAnimation(
   validation: CPFValidateReturn,
@@ -83,9 +83,9 @@ function prepareElementsToAppend(
     elements.push(element);
   }
 
-  elements.splice(3, 0, '.');
-  elements.splice(7, 0, '.');
-  elements.splice(11, 0, '-');
+  elements.splice(3, 0, false);
+  elements.splice(7, 0, false);
+  elements.splice(11, 0, false);
 
   const base = elements.map((element, index) => (
     <AnimationNumberDiv
@@ -93,5 +93,10 @@ function prepareElementsToAppend(
       {...element}
     />
   ));
-  return base;
+  return (
+    <>
+      <div>'coisa'</div>
+      {base}
+    </>
+  );
 }
