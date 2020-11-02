@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { MyElement } from '../ValidationAnimation';
-import { firstDigitFirstStep$ } from '../ValidationOrchestration/DigitOrchestration';
-import { useDigitUp } from './useDigitUp';
+import { firstDigitSecondStep$ } from '../ValidationOrchestration/DigitOrchestration';
+import { useDigitDown } from './useDigitDown';
 
-export const useAnimationDigitUp = (
+export const useAnimationDigitDown = (
   element: MyElement,
   digitSubject: Subject<number>,
 ) => {
@@ -21,9 +21,9 @@ export const useAnimationDigitUp = (
       .subscribe(setIndex);
   }, [digitSubject, index]);
 
-  const { digit, done } = useDigitUp(
-    element.number,
+  const { digit, done } = useDigitDown(
     element.firstDigit,
+    0,
     index === element.index,
   );
 

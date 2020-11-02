@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
+import { timerValue } from '../ValidationOrchestration/DigitOrchestration';
 
 export const useDigitUp = (
   originalValue: number,
@@ -12,7 +13,12 @@ export const useDigitUp = (
   );
   const [done, setDone] = useState(false);
 
-  const ticker$ = interval(50).pipe(
+  const timerTicker =
+    finalValue > 100
+      ? timerValue
+      : timerValue * 10;
+
+  const ticker$ = interval(timerTicker).pipe(
     takeWhile(() => !done),
   );
 

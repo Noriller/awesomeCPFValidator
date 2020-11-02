@@ -27,15 +27,11 @@ const ValidateShenanigans = () => {
   let cpf = useChangeInputBox();
 
   if (click) {
-    const resultValidation = new CPFValidator(
+    new CPFValidator(
       cpf.getUnmaskedCPF(),
     ).Validate();
 
-    text = (
-      <ValidationAnimation
-        {...resultValidation}
-      />
-    );
+    text = <ValidationAnimation />;
   }
 
   return (

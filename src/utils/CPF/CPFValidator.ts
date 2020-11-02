@@ -1,4 +1,5 @@
-import { CPFValidation, CPFValidateReturn, ValidationSteps } from './CPFValidation';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { CPFValidation, CPFValidateReturn, ValidationSteps } from './CPFInterfaces';
 
 class CPFValidator {
 
@@ -35,13 +36,13 @@ class CPFValidator {
     };
   }
 
-  public Validate (): CPFValidateReturn {
+  public Validate () {
 
     ( !this.knownInvalids() ) &&
       this.validateFirstDigit() &&
       this.validateLastDigit();
 
-    return this.resultValidation;
+    cpfValidation$.next( this.resultValidation );
   }
 
   public knownInvalids (): ValidationSteps {
@@ -121,3 +122,5 @@ class CPFValidator {
 }
 
 export default CPFValidator;
+
+export const cpfValidation$ = new ReplaySubject<CPFValidateReturn>( 1 );

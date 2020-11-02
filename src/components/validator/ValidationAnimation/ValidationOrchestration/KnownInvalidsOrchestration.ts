@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { delay, finalize, tap } from 'rxjs/operators';
-import { firstDigitFirstStep$ } from './FirstDigitOrchestration';
+import { firstDigitFirstStep$ } from './DigitOrchestration';
 
 export const knownInvalids$ = new BehaviorSubject( true );
 

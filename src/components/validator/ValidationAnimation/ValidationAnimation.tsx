@@ -1,45 +1,19 @@
-import { CPFValidateReturn } from '../../../utils/CPF/CPFValidation';
 import React, {
   useEffect,
   useState,
 } from 'react';
-import AnimationNumberDiv from './AnimationNumberDiv/AnimationNumberDiv';
 import { knownInvalidStep } from './ValidationOrchestration/KnownInvalidsOrchestration';
+import ValidationDigitMultiplicationsDiv from './ValidationDigitMultiplicationsDiv/ValidationDigitMultiplicationsDiv';
+import ValidationText from './ValidationText/ValidationText';
+import AllDigitsFromCPF from './AllDigitsFromCPF';
 
-function ValidationAnimation(
-  validation: CPFValidateReturn,
-) {
-  const [hideText, setHide] = useState(true);
-
-  const base = prepareElementsToAppend(
-    validation,
-  );
-
-  useEffect(() => {
-    const sub = knownInvalidStep.subscribe(
-      complete => {
-        setHide(false);
-      },
-    );
-
-    return () => sub.unsubscribe();
-  }, []);
-
+function ValidationAnimation() {
   return (
     <>
       <div>
-        {base}
-        <div
-          style={{
-            display: hideText ? 'none' : '',
-            color: validation.animationProps.valid
-              ? 'green'
-              : 'red',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-          }}>
-          {validation.text}
-        </div>
+        <ValidationDigitMultiplicationsDiv />
+        <AllDigitsFromCPF />
+        <ValidationText />
       </div>
     </>
   );
@@ -52,51 +26,4 @@ export interface MyElement {
   number: number;
   firstDigit: number | boolean;
   lastDigit: number | boolean;
-}
-
-function prepareElementsToAppend(
-  validation: CPFValidateReturn,
-) {
-  console.log(validation);
-
-  const elements = [];
-
-  for (
-    let index = 0;
-    index < validation.fullCpfArray.length;
-    index++
-  ) {
-    const number = validation.fullCpfArray[index];
-
-    const element: MyElement = {
-      index,
-      number,
-      firstDigit:
-        validation.animationProps.firstDigit
-          ?.array?.[index] ?? false,
-      lastDigit:
-        validation.animationProps.lastDigit
-          ?.array?.[index] ?? false,
-    };
-
-    console.log(element);
-    elements.push(element);
-  }
-
-  elements.splice(3, 0, false);
-  elements.splice(7, 0, false);
-  elements.splice(11, 0, false);
-
-  const base = elements.map((element, index) => (
-    <AnimationNumberDiv
-      key={index}
-      {...element}
-    />
-  ));
-  return (
-    <>
-      <div>'coisa'</div>
-      {base}
-    </>
-  );
 }
