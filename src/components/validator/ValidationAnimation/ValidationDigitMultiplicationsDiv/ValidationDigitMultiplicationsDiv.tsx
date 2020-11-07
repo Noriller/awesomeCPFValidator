@@ -3,7 +3,6 @@ import { cpfValidation$ } from '../../../../utils/CPF/CPFValidator';
 import { useDigitMultiplications } from '../AnimationNumberDiv/useDigitMultiplications';
 import {
   firstDigitSecondStep$,
-  lastDigitSecondStep,
   lastDigitSecondStep$,
 } from '../ValidationOrchestration/DigitOrchestration';
 

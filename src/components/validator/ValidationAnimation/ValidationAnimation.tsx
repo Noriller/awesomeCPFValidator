@@ -1,8 +1,3 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
-import { knownInvalidStep } from './ValidationOrchestration/KnownInvalidsOrchestration';
 import ValidationDigitMultiplicationsDiv from './ValidationDigitMultiplicationsDiv/ValidationDigitMultiplicationsDiv';
 import ValidationText from './ValidationText/ValidationText';
 import AllDigitsFromCPF from './AllDigitsFromCPF';

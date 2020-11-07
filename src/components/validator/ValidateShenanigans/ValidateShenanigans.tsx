@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-import { of } from 'rxjs';
 import CPFValidator from '../../../utils/CPF/CPFValidator';
 import useChangeInputBox from '../InputBox/useInputBox';
 import { useValidateClick } from './useValidateClick';
@@ -11,7 +9,6 @@ const ValidateShenanigans = () => {
     <text
       style={{
         fontSize: '0.8rem',
-        // fontWeight: 'lighter',
         fontStyle: 'italic',
       }}>
       {`Why don't you try using: 

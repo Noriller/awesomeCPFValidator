@@ -1,4 +1,3 @@
-import { tap } from 'rxjs/operators';
 import { MyElement } from '../ValidationAnimation';
 import { useAnimationDigitUp } from './useAnimationDigitUp';
 import { useBlink } from './useBlink';

@@ -1,4 +1,4 @@
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { CPFValidation, CPFValidateReturn, ValidationSteps } from './CPFInterfaces';
 
 class CPFValidator {

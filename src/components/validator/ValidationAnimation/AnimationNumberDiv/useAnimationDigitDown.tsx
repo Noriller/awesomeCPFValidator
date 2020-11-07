@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { MyElement } from '../ValidationAnimation';
-import { firstDigitSecondStep$ } from '../ValidationOrchestration/DigitOrchestration';
 import { useDigitDown } from './useDigitDown';
 
 export const useAnimationDigitDown = (
