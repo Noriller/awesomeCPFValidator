@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
+import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { firstDigitSecondStep$ } from '../ValidationOrchestration/DigitOrchestration';
 import { useDigitDown } from './useDigitDown';
 import { useDigitUp } from './useDigitUp';
 
 export const useDigitMultiplications = (
-  totalValue: number,
+  totalSumArray: number,
   digitBeingVerified: number,
+  subject: Subject<number>,
 ) => {
   const [index, setIndex] = useState(null);
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    firstDigitSecondStep$
+    subject
       .asObservable()
       .pipe(distinctUntilChanged())
       .subscribe(setIndex);
@@ -21,14 +22,14 @@ export const useDigitMultiplications = (
   const {
     digit: accumulation,
     done: accumulationDone,
-  } = useDigitUp(0, totalValue, index > 0);
+  } = useDigitUp(0, totalSumArray, index > 0);
 
   const {
     digit: multiplication,
     done: multiplicationDone,
   } = useDigitUp(
-    totalValue,
-    totalValue * 10,
+    totalSumArray,
+    totalSumArray * 10,
     accumulationDone,
   );
 
@@ -36,7 +37,7 @@ export const useDigitMultiplications = (
     digit: module,
     done: moduleDone,
   } = useDigitDown(
-    totalValue * 10,
+    totalSumArray * 10,
     digitBeingVerified,
     multiplicationDone,
   );

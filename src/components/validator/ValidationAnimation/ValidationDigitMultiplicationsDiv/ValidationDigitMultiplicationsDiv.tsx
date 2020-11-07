@@ -1,6 +1,11 @@
 import { CPFValidateReturn } from '../../../../utils/CPF/CPFInterfaces';
 import { cpfValidation$ } from '../../../../utils/CPF/CPFValidator';
 import { useDigitMultiplications } from '../AnimationNumberDiv/useDigitMultiplications';
+import {
+  firstDigitSecondStep$,
+  lastDigitSecondStep,
+  lastDigitSecondStep$,
+} from '../ValidationOrchestration/DigitOrchestration';
 
 const ValidationDigitMultiplicationsDiv = () => {
   let validation: CPFValidateReturn;
@@ -16,6 +21,7 @@ const ValidationDigitMultiplicationsDiv = () => {
     validation.animationProps.firstDigit?.sum,
     validation.animationProps.firstDigit
       ?.verification,
+    firstDigitSecondStep$,
   );
 
   const {
@@ -25,13 +31,13 @@ const ValidationDigitMultiplicationsDiv = () => {
     validation.animationProps.lastDigit?.sum,
     validation.animationProps.lastDigit
       ?.verification,
+    lastDigitSecondStep$,
   );
 
   return (
     <div>
-      {firstDigititDone
-        ? accumulatorLastDigit
-        : accumulatorFirstDigit}
+      {accumulatorLastDigit}
+      {accumulatorFirstDigit}
     </div>
   );
 };

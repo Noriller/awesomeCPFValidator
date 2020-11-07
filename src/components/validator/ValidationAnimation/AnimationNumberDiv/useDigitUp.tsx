@@ -24,12 +24,14 @@ export const useDigitUp = (
 
   useEffect(() => {
     if (!start) return;
-    ticker$.subscribe(num => {
+    const sub = ticker$.subscribe(num => {
       const number = num + originalValue;
       if (number <= finalValue) {
         setDigit(number);
       } else {
+        setDigit(number);
         setDone(true);
+        sub.unsubscribe();
       }
     });
   }, [start]);

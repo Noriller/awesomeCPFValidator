@@ -22,12 +22,14 @@ export const useDigitDown = (
 
   useEffect(() => {
     if (!start) return;
-    ticker$.subscribe(num => {
+    const sub = ticker$.subscribe(num => {
       const number = startValue - num;
       if (number > finalValue) {
         setDigit(number);
       } else {
+        setDigit(number);
         setDone(true);
+        sub.unsubscribe();
       }
     });
   }, [start]);
