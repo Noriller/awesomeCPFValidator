@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-export const timerValue = 1;
+export const timerValue = 0.1;
 
 export const firstDigitFirstStep$ = new BehaviorSubject( null );
 

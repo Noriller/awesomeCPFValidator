@@ -20,6 +20,8 @@ const ValidationDigitMultiplicationsDiv = () => {
     validation.animationProps.firstDigit?.sum,
     validation.animationProps.firstDigit
       ?.verification,
+    validation.animationProps.firstDigit
+      ?.verifiedDigit,
     firstDigitSecondStep$,
   );
 
@@ -30,6 +32,8 @@ const ValidationDigitMultiplicationsDiv = () => {
     validation.animationProps.lastDigit?.sum,
     validation.animationProps.lastDigit
       ?.verification,
+    validation.animationProps.lastDigit
+      ?.verifiedDigit,
     lastDigitSecondStep$,
   );
 

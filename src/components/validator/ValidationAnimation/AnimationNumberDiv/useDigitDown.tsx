@@ -14,7 +14,7 @@ export const useDigitDown = (
   const timerTicker =
     startValue > 100
       ? timerValue
-      : timerValue * 10;
+      : timerValue * 100;
 
   const ticker$ = interval(timerTicker).pipe(
     takeWhile(() => !done),
@@ -24,10 +24,9 @@ export const useDigitDown = (
     if (!start) return;
     const sub = ticker$.subscribe(num => {
       const number = startValue - num;
-      if (number > finalValue) {
+      if (number >= finalValue) {
         setDigit(number);
       } else {
-        setDigit(number);
         setDone(true);
         sub.unsubscribe();
       }

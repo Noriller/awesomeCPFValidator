@@ -64,7 +64,8 @@ class CPFValidator {
     this.resultValidation.animationProps.firstDigit = {
       array,
       sum,
-      verification
+      verification,
+      verifiedDigit: this.firstDigit
     };
 
     if ( !validDigit )
@@ -82,7 +83,8 @@ class CPFValidator {
     this.resultValidation.animationProps.lastDigit = {
       array,
       sum,
-      verification
+      verification,
+      verifiedDigit: this.lastDigit
     };
 
     if ( validDigit ) {

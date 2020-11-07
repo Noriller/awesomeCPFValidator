@@ -6,6 +6,7 @@ import { useDigitUp } from './useDigitUp';
 
 export const useDigitMultiplications = (
   totalSumArray: number,
+  digitVerification: number,
   digitBeingVerified: number,
   subject: Subject<number>,
 ) => {
@@ -38,7 +39,7 @@ export const useDigitMultiplications = (
     done: moduleDone,
   } = useDigitDown(
     totalSumArray * 10,
-    digitBeingVerified,
+    digitVerification,
     multiplicationDone,
   );
 

@@ -27,6 +27,7 @@ interface Digits {
   array: number[];
   sum: number;
   verification: number;
+  verifiedDigit: number;
 }
 
 export interface ValidationSteps extends Boolean {
